@@ -1,0 +1,13 @@
+#!/bin/bash
+
+carpeta=$1
+
+for archivo in "$carpeta"/*.log; do
+    [ -e "$archivo" ] || continue
+
+    nombre=$(basename "$archivo")
+    warnings=$(grep -c "WARNING" "$archivo")
+    errores=$(grep -c "ERROR" "$archivo")
+
+    echo "$nombre -> $warnings WARNING, $errores ERROR"
+done
